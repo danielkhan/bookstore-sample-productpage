@@ -24,7 +24,7 @@ async function getReviews(productId) {
     const url = `${services.reviews.name}/${services.reviews.endpoint}/${productId}`;
     console.log(`Calling ${url}`);
     const response = await axios.get(url);
-    console.log(response.data);
+    console.log(response);
     if (response.error) console.error(response.error);
     return response.data;
   } catch (err) {
@@ -41,12 +41,11 @@ router.get('/', (req, res) => {
 router.get('/productpage', async (req, res, next) => {
   try {
     const product = products[0];
-    const x = await Promise.all(
+    const [details, reviews] = await Promise.all(
       [getDetails(product.id), getReviews(product.id)],
     );
-    console.log(x);
-    // console.log(reviews);
-    return res.render('productpage', { product /*, details, reviews*/ });
+    console.log(details, reviews);
+    return res.render('productpage', { product, details, reviews });
   } catch (err) {
     return next(err);
   }

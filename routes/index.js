@@ -24,6 +24,7 @@ async function getReviews(productId) {
     const url = `${services.reviews.name}/${services.reviews.endpoint}/${productId}`;
     console.log(`Calling ${url}`);
     const response = await axios.get(url);
+    console.log(response);
     if (response.error) console.error(response.error);
     return response.data;
   } catch (err) {

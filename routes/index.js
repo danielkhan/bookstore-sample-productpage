@@ -9,6 +9,7 @@ const { products } = require('../data');
 async function getDetails(productId) {
   try {
     const url = `${services.details.name}/${services.details.endpoint}/${productId}`;
+    console.log(`Calling ${url}`);
     const response = await axios.get(url);
     if (response.error) console.error(response.error);
     return response.data;
@@ -21,6 +22,7 @@ async function getDetails(productId) {
 async function getReviews(productId) {
   try {
     const url = `${services.reviews.name}/${services.reviews.endpoint}/${productId}`;
+    console.log(`Calling ${url}`);
     const response = await axios.get(url);
     if (response.error) console.error(response.error);
     return response.data;

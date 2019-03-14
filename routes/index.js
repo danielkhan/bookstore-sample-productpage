@@ -41,12 +41,12 @@ router.get('/', (req, res) => {
 router.get('/productpage', async (req, res, next) => {
   try {
     const product = products[0];
-    const { details, reviews } = await Promise.all(
+    const x = await Promise.all(
       [getDetails(product.id), getReviews(product.id)],
     );
-    console.log(details);
-    console.log(reviews);
-    return res.render('productpage', { product, details, reviews });
+    console.log(x);
+    // console.log(reviews);
+    return res.render('productpage', { product /*, details, reviews*/ });
   } catch (err) {
     return next(err);
   }

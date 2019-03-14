@@ -7,15 +7,27 @@ const router = express.Router();
 const { products } = require('../data');
 
 async function getDetails(productId) {
-  const url = `${services.details.name}/${services.details.endpoint}/${productId}`;
-  const response = await axios.get(url);
-  return response.data;
+  try {
+    const url = `${services.details.name}/${services.details.endpoint}/${productId}`;
+    const response = await axios.get(url);
+    if (response.error) console.error(response.error);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
 }
 
 async function getReviews(productId) {
-  const url = `${services.reviews.name}/${services.reviews.endpoint}/${productId}`;
-  const response = await axios.get(url);
-  return response.data;
+  try {
+    const url = `${services.reviews.name}/${services.reviews.endpoint}/${productId}`;
+    const response = await axios.get(url);
+    if (response.error) console.error(response.error);
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
 }
 
 /* GET home page. */
@@ -29,6 +41,8 @@ router.get('/productpage', async (req, res, next) => {
     const { details, reviews } = await Promise.all(
       [getDetails(product.id), getReviews(product.id)],
     );
+    console.log(details);
+    console.log(reviews);
     return res.render('productpage', { product, details, reviews });
   } catch (err) {
     return next(err);

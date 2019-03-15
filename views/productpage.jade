@@ -5,18 +5,8 @@ block content
     .container
       .navbar-header
         a.navbar-brand(href='#') BookInfo Sample
-      |     {% if user: %}
-      p.navbar-text.navbar-right
         i.glyphicon.glyphicon-user(aria-hidden='true')
-        span(style='padding-left: 5px;')
-          | {{ user }} (
-          a(href='logout') sign out
-          |  )
-      |     {% else %}
       button.btn.btn-default.navbar-btn.navbar-right(type='button', data-toggle='modal', href='#login-modal')
-        | Sign
-        | in
-      |     {% endif %}
   #login-modal.modal.fade(role='dialog')
     .modal-dialog
       .modal-content
@@ -63,4 +53,10 @@ block content
             p=review.text
             small=review.reviewer
             p
-              | Rating: #{review.rating}
+              font(color=review.rating.color)
+                each i in range(review.rating.stars)
+                  span.glyphicon.glyphicon-star
+                each i in range(5 - review.rating.stars)
+                  span.glyphicon.glyphicon-star-empty
+
+

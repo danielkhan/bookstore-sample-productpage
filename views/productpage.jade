@@ -52,13 +52,16 @@ block content
           blockquote
             p=review.text
             small=review.reviewer
-            p
-              font(color=review.rating.color)
-                - for (var i = 0; i < review.rating.stars; ++i) {
-                  span.glyphicon.glyphicon-star
-                - }
-                - for (var i = 0; i < 5 - review.rating.stars; ++i) {
+            if review.rating
+              p
+                font(color=review.rating.color)
+                  - for (var i = 0; i < review.rating.stars; ++i) {
+                    span.glyphicon.glyphicon-star
+                  - }
+                  - for (var i = 0; i < 5 - review.rating.stars; ++i) {
                     span.glyphicon.glyphicon-star-empty
-                - }
+                  - }
+            else if reviews.error
+              p=reviews.error
 
 

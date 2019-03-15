@@ -54,9 +54,11 @@ block content
             small=review.reviewer
             p
               font(color=review.rating.color)
-                each i in range(review.rating.stars)
+                - for (var i = 0; i < review.rating.stars; ++i) {
                   span.glyphicon.glyphicon-star
-                each i in range(5 - review.rating.stars)
-                  span.glyphicon.glyphicon-star-empty
+                - }
+                - for (var i = 0; i < 5 - review.rating.stars; ++i) {
+                    span.glyphicon.glyphicon-star-empty
+                - }
 
 
